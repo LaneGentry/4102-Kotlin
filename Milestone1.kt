@@ -44,6 +44,17 @@ fun main() {
     {
         println("Bye.")
     }
+
+    var double: Double
+    println("How many classes will be in your program")
+    double = readln();
+    if(double != validInput)
+
+    val triple : Triple<String, String, String> = Triple (first: Jack, middle: Austin, Last: McLaughlin)
+
+    println("Created by "+ triple.toString())
+
+
 }
 
 fun getMemberInfo(numMembers: Int, group: HashMap<Int, MutableList<String>>)
