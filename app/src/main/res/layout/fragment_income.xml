@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0EAD6"
+    tools:context=".incomeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/guide2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/guide2"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:text="Income"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="Insert Income"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textViewGas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTextPersonName"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:text="Gas"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewFun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTextGas"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:text="Fun"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewMis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextTextPersonName4"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:text="Miscellaneous"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextTextGas"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/textViewGas"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="Input gas expenses"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName4"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textViewFun"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="Total spent on activities"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName5"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textViewMis"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="All other expenses"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textViewMortgage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTextPersonName5"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:text="Mortgage"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName6"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textViewMortgage"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="All other expenses"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textViewRent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTextPersonName6"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:text="Rent"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName7"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textViewRent"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="Monthly Rent"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textViewPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTextPersonName7"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:text="Phone"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName8"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textViewPhone"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="Monthly Phone Payment"
+        android:inputType="textPersonName" />
+    <TextView
+        android:id="@+id/textViewUtilities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTextPersonName8"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:text="Utilities"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName9"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textViewUtilities"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="Utilities Payment"
+        android:inputType="textPersonName" />
+    <TextView
+        android:id="@+id/textViewInsurance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTextPersonName9"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:text="Insurance"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName10"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textViewInsurance"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="Insurance Payment"
+        android:inputType="textPersonName" />
+
+
+
+</RelativeLayout>
