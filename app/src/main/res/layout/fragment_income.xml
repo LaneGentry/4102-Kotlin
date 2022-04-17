@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/guide2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="" />
 
     <TextView
@@ -19,28 +19,28 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/guide2"
         android:layout_centerInParent="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="0dp"
         android:text="Income"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextTextIncome"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_below="@+id/textView2"
         android:layout_centerInParent="true"
         android:ems="10"
         android:hint="Insert Income"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/textViewGas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextTextPersonName"
+        android:layout_below="@+id/editTextTextIncome"
         android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:text="Gas"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextTextGas"
         android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:text="Fun"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextTextPersonName4"
         android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:text="Miscellaneous"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextTextPersonName5"
         android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:text="Mortgage"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -124,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextTextPersonName6"
         android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:text="Rent"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -145,7 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextTextPersonName7"
         android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:text="Phone"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -159,13 +159,14 @@
         android:ems="10"
         android:hint="Monthly Phone Payment"
         android:inputType="textPersonName" />
+
     <TextView
         android:id="@+id/textViewUtilities"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextTextPersonName8"
         android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:text="Utilities"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -179,13 +180,14 @@
         android:ems="10"
         android:hint="Utilities Payment"
         android:inputType="textPersonName" />
+
     <TextView
         android:id="@+id/textViewInsurance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextTextPersonName9"
         android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:text="Insurance"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -200,6 +202,14 @@
         android:hint="Insurance Payment"
         android:inputType="textPersonName" />
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTextPersonName10"
+        android:layout_centerInParent="true"
+        android:backgroundTint="#EFB644"
+        android:text="Save And Next" />
 
 
 </RelativeLayout>
