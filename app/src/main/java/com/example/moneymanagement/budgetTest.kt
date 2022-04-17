@@ -3,6 +3,7 @@ package com.example.termproject_a
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.moneymanagement.R
 import java.lang.Exception
 import kotlin.math.absoluteValue
 
