@@ -4,10 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/brand/AndroidStudioProjects/4102-Kotlin/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/brand/AndroidStudioProjects/4102-Kotlin/app/src/main/res/layout/budget_guide.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/brand/AndroidStudioProjects/4102-Kotlin/app/src/main/res/layout/fragment_budget.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/brand/AndroidStudioProjects/4102-Kotlin/app/src/main/res/layout/fragment_income.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/brand/AndroidStudioProjects/4102-Kotlin/app/src/main/res/layout/fragment_visualizer.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/brand/AndroidStudioProjects/4102-Kotlin/app/src/main/res/layout/fragment_welcome.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/brand/AndroidStudioProjects/4102-Kotlin/app/src/main/res/layout/list_item.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/brand/AndroidStudioProjects/4102-Kotlin/app/src/main/res/layout/saving_reasons.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/brand/AndroidStudioProjects/4102-Kotlin/app/src/main/res/layout/top_tips.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/brand/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/brand/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/fragment_budget.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/brand/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/fragment_income.xml" value="0.264" />

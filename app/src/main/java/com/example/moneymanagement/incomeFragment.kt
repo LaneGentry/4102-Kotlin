@@ -44,10 +44,15 @@ class incomeFragment : Fragment() {
 
         // When the save/next button is clicked the income is taken from the edittextIncome
         buttonSaveAndNext.setOnClickListener{
-            var income = incomeEditText.text.toString()   //Converts entered income to text, then to string
+            //var income = incomeEditText.text.toString()   //Converts entered income to text, then to string
 
-            var BudgetObject = Budget(Integer.parseInt(income))  // parseInt Function turns string value into int value
 
+            // D bait line //
+            //var BudgetObject = Budget(Integer.parseInt(income))  // parseInt Function turns string value into int value
+
+            val fragment = BudgetFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.fragmentContainerView, fragment)?.commit()
         }
 
 
