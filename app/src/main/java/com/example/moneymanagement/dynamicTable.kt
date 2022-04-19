@@ -11,7 +11,7 @@ import kotlin.math.absoluteValue
 class dynamicTable : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.dynamic_table)
 
         val mmm = Budget(13000)
         val BT = "budgetTest"
@@ -72,9 +72,7 @@ class dynamicTable : AppCompatActivity() {
         button.text = "Simple Button"
         button.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT)
-        //findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.mainActivity).addView(button)
-        tl.addView(button)
-        println("Size: ${mmm.sections.size}")
+
 
         var rowData = mutableMapOf<TableRow, Budget.BudgetSection>()
 
@@ -107,10 +105,10 @@ class dynamicTable : AppCompatActivity() {
 
             //populate data from object
             var count = 0
-            mmm.getSectionData(section.name).forEach()
+            for(data in section.getSectionData())
             {
                 var tv = TextView(context)
-                tv.setText(it)
+                tv.setText(data)
                 count++
                 tv.id = count
                 tableRow.addView(tv)
