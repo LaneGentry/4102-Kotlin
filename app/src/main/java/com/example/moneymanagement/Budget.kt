@@ -168,6 +168,11 @@ class Budget(var income: Double)
                 //if current percentage differs from percentage calculated by new amount also set percentage
                 if(newPercentage != percentage) percentage = newPercentage
             }
+        
+        fun getSectionData(): List<String>
+        {
+            return listOf(name, percentage.toString(), amount.toString())
+        }
 
         override fun toString(): String {
             var section = ""

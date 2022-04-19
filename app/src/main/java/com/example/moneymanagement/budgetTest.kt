@@ -7,7 +7,7 @@ import com.example.moneymanagement.R
 import java.lang.Exception
 import kotlin.math.absoluteValue
 
-class MainActivity : AppCompatActivity() {
+class budgetTest : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

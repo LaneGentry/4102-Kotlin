@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.moneymanagement.R
 import kotlin.math.absoluteValue
 
 
-class MainActivity : AppCompatActivity() {
+class dynamicTable : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
