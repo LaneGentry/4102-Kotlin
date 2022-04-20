@@ -120,14 +120,6 @@ class Budget(var income: Double)
         return (getFreePercentage() > 0)
     }
 
-    //I didn't want to fuck with BigDecimal so here's this instead
-    private fun round(decimal: Double, scale: Int = 0): Double
-    {
-        //sets number of decimal points based on scale param
-        val df: DecimalFormat = DecimalFormat("#.${"#".repeat(scale)}")
-        df.roundingMode = RoundingMode.HALF_UP
-        return df.format(decimal).toDouble()
-    }
 
     override fun toString(): String
     {
@@ -152,7 +144,6 @@ class Budget(var income: Double)
         var percentage: Double = percentage
             set(value)
             {
-
                 field = value
                 val newAmount = field * income
                 //if current amount differs from amount calculated by new percentage also set amount
@@ -168,7 +159,7 @@ class Budget(var income: Double)
                 //if current percentage differs from percentage calculated by new amount also set percentage
                 if(newPercentage != percentage) percentage = newPercentage
             }
-        
+
         fun getSectionData(): List<String>
         {
             return listOf(name, percentage.toString(), amount.toString())
@@ -184,3 +175,12 @@ class Budget(var income: Double)
 
     }//end of inner class BudgetSection
 }//end of Budget class
+
+//I didn't want to fuck with BigDecimal so here's this instead
+fun round(decimal: Double, scale: Int = 0): Double
+{
+    //sets number of decimal points based on scale param
+    val df: DecimalFormat = DecimalFormat("#.${"#".repeat(scale)}")
+    df.roundingMode = RoundingMode.HALF_UP
+    return df.format(decimal).toDouble()
+}

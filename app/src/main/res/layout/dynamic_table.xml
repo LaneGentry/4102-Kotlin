@@ -70,7 +70,7 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="amount/percentage"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:minHeight="48dp"
         app:layout_constraintStart_toEndOf="@+id/sectionName"
         app:layout_constraintTop_toBottomOf="@+id/inputType" />
