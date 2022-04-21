@@ -23,8 +23,6 @@ import kotlin.math.absoluteValue
 *       adding it on this screen will probably make it very cluttered but I (LK) don't know shit about how to make multiple screens
 *       interact and pass information so if y'all have figured it out it would be awesome otherwise it'll end up on this page
 *
-*
-*
 */
 class dynamicTable : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,13 +30,15 @@ class dynamicTable : AppCompatActivity() {
         setContentView(R.layout.dynamic_table)
 
         //just to have a budget object to test with
-        //TO DO: pass budget object into this file
-        val budgetTest = Budget(13000)
+        //TO DO: add global constant for the key 'income'
+        val income = intent.extras!!.getInt("income")
+        println("DynamicTable income: $income")
+        val budget = Budget(income)
 
         //current idea: initialize current section to one of the defaults since
         //it has to be initialized in order to be passed to a function
-        var currSection = budgetTest.getSection("savings")
-        println(budgetTest.getSection("savings").percentage)
+        var currSection = budget.getSection("savings")
+        println(budget.getSection("savings").percentage)
 
         //bind table rows to BudgetSection objects - done once on initial table gen
         var rowData = mutableMapOf<TableRow, Budget.BudgetSection>()
@@ -52,47 +52,7 @@ class dynamicTable : AppCompatActivity() {
         //findViewById<RadioGroup>(R.id.inputType).setOnCheckedChangeListener()
 
 
-
-        val BT = "budgetTest"
-        //budgetTest.getSection("savings").amount = 33.0
-
-        //use named argument annotation (param name = param value to be passed) when leaving out some of the optional params
-        budgetTest.addSection("amount based", amount = 54.8)
-        budgetTest.addSection("percentage based", percentage = 0.12)
-        Log.i(BT, budgetTest.toString())
-        try
-        {
-            budgetTest.getSection("savings").amount = 44.0
-            println(budgetTest.getSection("savings").percentage)
-            //mmm.addSection("savings", .25)
-            //mmm.addSection("bad section", 0.323, 683.0)
-            budgetTest.getSection("not a valid section")
-
-        }
-        catch (e: Exception)
-        {
-            println(e.message)
-        }
-
-        budgetTest.removeSection("housing")
-        Log.i(BT, "\n ${budgetTest.toString()}")
-
-        Log.i(BT, "\n ${budgetTest.getSection("utilities").toString()}")
-
-        if (budgetTest.hasEmptySpace())
-        {
-            Log.i(BT, "has ${budgetTest.getFreePercentage() * 100} space")
-            Log.i(BT, "\$${budgetTest.getFreeAmount()} unused")
-        }
-        else
-        {
-            Log.i(BT, "Full: ${budgetTest.getFreePercentage() * 100}% free")
-            Log.i(BT, "\$${budgetTest.getFreeAmount().absoluteValue} over budget")
-        }
-
-        println("HERE")
-
-        //get table view
+        //get XML table object
         val tl = findViewById<TableLayout>(R.id.displayTable)
 
         //get context
@@ -103,7 +63,7 @@ class dynamicTable : AppCompatActivity() {
             LinearLayout.LayoutParams.WRAP_CONTENT)
 
         //loop through each section of the budget
-        for (section in budgetTest.sections)
+        for (section in budget.sections)
         {
             //create new row and give it the params from above
             val tableRow = TableRow(context)
@@ -118,11 +78,12 @@ class dynamicTable : AppCompatActivity() {
                 //TO DO: proper null checking - it could actually be null
                 currSection = rowData[it]!!
 
-                //updates textview with name of section (table row) chosen by the user
+                //updates sectionName textview with name of section (table row) chosen by the user
+                //so that the user has a visual queue for which row they selected
                 findViewById<TextView>(R.id.sectionName).text = currSection.name
             }
 
-            //add current section keyed to current table row to the Map
+            //add current section keyed to current table row to the rowData Map
             rowData[tableRow] = section
 
             //populate data from object - function creates new TextViews for the row as needed

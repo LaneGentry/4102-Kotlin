@@ -46,6 +46,7 @@ class welcomeFragment : Fragment() {
             val fragment = incomeFragment()
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.fragmentContainerView, fragment)?.commit()
+
         }
 
 

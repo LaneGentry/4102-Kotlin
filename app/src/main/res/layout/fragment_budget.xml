@@ -7,6 +7,7 @@
     tools:context=".BudgetFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:id="@+id/guide3"
         android:layout_width="match_parent"
@@ -14,20 +15,20 @@
         android:text="" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/display_budget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/guide3"
         android:layout_centerInParent="true"
         android:layout_marginTop="200dp"
-        android:text="Visualizer"
-        android:backgroundTint="#EFB644"/>
+        android:backgroundTint="#EFB644"
+        android:text="Visualizer" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button4"
+        android:layout_below="@+id/display_budget"
         android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
         android:text="Budget Guide"

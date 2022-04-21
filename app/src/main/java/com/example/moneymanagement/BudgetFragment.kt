@@ -1,15 +1,18 @@
 package com.example.moneymanagement
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.Fragment
+import com.example.termproject_a.dynamicTable
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1 = "income"
+//private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -17,16 +20,18 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class BudgetFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    //income passed from incomeFragment.kt
+    private var income: Int? = null
+    //private var param2: String? = "param2 default"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            income = it.getInt(ARG_PARAM1)
+            //param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
     override fun onCreateView(
@@ -34,7 +39,18 @@ class BudgetFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_budget, container, false)
+        val view = inflater.inflate(R.layout.fragment_budget, container, false)
+
+        //event listener for the visualizer button - starts the dynamicTable.kt activity
+        val displayBudgetBtn = view.findViewById<Button>(R.id.display_budget)
+        displayBudgetBtn.setOnClickListener {
+            //pass income to the dynamicTable (which will use it to create the default Budget object)
+            val intent = Intent(activity, dynamicTable()::class.java)
+            intent.putExtra("income", income)
+            startActivity(intent)
+        }
+
+        return view
     }
 
     companion object {
@@ -48,11 +64,11 @@ class BudgetFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(income: Int) =
             BudgetFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putInt(ARG_PARAM1, income)
+                    //putString(ARG_PARAM2, param2)
                 }
             }
     }

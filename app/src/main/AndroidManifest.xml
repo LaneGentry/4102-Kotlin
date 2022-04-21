@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyManagement">
-        <!--
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -19,9 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        -->
 
-        <!-- LK: just a temp way to get to the dynamicTable for testing-->
+        <activity android:name="com.example.termproject_a.dynamicTable"></activity>
+        <!-- LK: just a temp way to get to the dynamicTable for testing
         <activity
             android:name="com.example.termproject_a.dynamicTable"
             android:exported="true">
@@ -31,6 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        -->
 
     </application>
 

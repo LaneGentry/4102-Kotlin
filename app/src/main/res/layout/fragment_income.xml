@@ -33,7 +33,7 @@
         android:ems="10"
         android:hint="Insert Income"
         android:inputType="number" />
-
+<!--
     <TextView
         android:id="@+id/textViewGas"
         android:layout_width="wrap_content"
@@ -201,9 +201,10 @@
         android:ems="10"
         android:hint="Insurance Payment"
         android:inputType="textPersonName" />
+    -->
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/to_table_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextTextPersonName10"

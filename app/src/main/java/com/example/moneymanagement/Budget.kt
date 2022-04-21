@@ -3,6 +3,7 @@ package com.example.termproject_a
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
+
 class Budget(var income: Double)
 {
     //income will usually be an Int but having the primary be a Double accounts for the few times it isn't
@@ -159,6 +160,7 @@ class Budget(var income: Double)
                 //if current percentage differs from percentage calculated by new amount also set percentage
                 if(newPercentage != percentage) percentage = newPercentage
             }
+            get() = round(field, 2)
 
         fun getSectionData(): List<String>
         {

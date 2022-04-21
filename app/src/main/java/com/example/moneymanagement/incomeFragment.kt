@@ -38,25 +38,29 @@ class incomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_income, container, false)
-
+        val context = this
         var incomeEditText : EditText = v.findViewById(R.id.editTextTextIncome) //Makes Edit TextBox Object
-        var buttonSaveAndNext : Button = v.findViewById(R.id.button3)
+        var buttonSaveAndNext : Button = v.findViewById(R.id.to_table_display)
 
         // When the save/next button is clicked the income is taken from the edittextIncome
         buttonSaveAndNext.setOnClickListener{
-            //var income = incomeEditText.text.toString()   //Converts entered income to text, then to string
+            println("save and next event...")
+            //TO DO: validate income - income cannot be null or blank. if it is display toast message and do not allow
+            //  the rest of the function to execute until it is valid
+            var income = Integer.parseInt(incomeEditText.text.toString())   //Converts entered income to text, then to string
 
 
             // D bait line //
-            //var BudgetObject = Budget(Integer.parseInt(income))  // parseInt Function turns string value into int value
+            //var budgetObject = Budget(income)  // parseInt Function turns string value into int value
 
             val fragment = BudgetFragment()
+            val bundle = Bundle()
+            bundle.putInt("income", income)
+            fragment.arguments = bundle
+
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.fragmentContainerView, fragment)?.commit()
         }
-
-
-
 
 
         return v
