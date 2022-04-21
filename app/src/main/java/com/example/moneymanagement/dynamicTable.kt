@@ -40,9 +40,18 @@ class dynamicTable : AppCompatActivity() {
         var currSection = budget.getSection("savings")
         println(budget.getSection("savings").percentage)
 
+        //FOR TESTING ONLY - plz do not leave this here
+        budget.getSection("savings").percentage = 0.01
+        println("unallocated: ${budget.getFreeAmount()} ")
         //get TextView for displaying income amount and use regex to replace the number portion with the budgets income
         val incomeDisp = findViewById<TextView>(R.id.display_incomeAmt)
         incomeDisp.text =  incomeDisp.text.replace("\\d+\\.\\d+".toRegex(), budget.income.toString())
+
+        val overBudgetDisp = findViewById<TextView>(R.id.display_overBudget)
+        val (templateToReplace) = Regex("^\\$(\\d+\\.\\d+)").find(overBudgetDisp.text)!!.destructured
+        println("TO REPLACE: $templateToReplace")
+        overBudgetDisp.text = overBudgetDisp.text.replace(templateToReplace.toRegex(), budget.getFreeAmount().toString())
+
 
         //bind table rows to BudgetSection objects - done once on initial table gen
         var rowData = mutableMapOf<TableRow, Budget.BudgetSection>()
@@ -101,7 +110,7 @@ class dynamicTable : AppCompatActivity() {
         }//end of budget sections loop
     }// end of on create
 
-    @SuppressLint("SetTextI18n")
+
     private fun updateSection(section: Budget.BudgetSection, rowData: Map<TableRow, Budget.BudgetSection>)
     {
         println("updateSection is updating the section: $section")
@@ -135,6 +144,26 @@ class dynamicTable : AppCompatActivity() {
             val tableRow = rowData.filterValues { it === section }.keys.elementAt(0)
             println("TABLE ROW: ${tableRow}")
             populateRow(tableRow, section)
+
+            //check if user is over budget and if so change ****** to display $ amount over budget
+
+            //gets budget object section belongs to - see Budget.kt for details
+            val budget = section.getBudgetObj()
+
+            if(!budget.hasEmptySpace())
+            {
+                //gets the TextView that displays whether or not the user is over budget
+                val overBudgetDisp = findViewById<TextView>(R.id.display_overBudget)
+                //":\\s(.*)$"
+                val (currDispToReplace) =  Regex("^(\\$\\d+\\.\\d+.*)$").find(overBudgetDisp.text)!!.destructured
+                println("STRING TO REPLACE: $currDispToReplace")
+                println("CURR TEXT: ${overBudgetDisp.text}")
+                overBudgetDisp.text = overBudgetDisp.text.replace(Regex.fromLiteral(currDispToReplace), budget.getFreeAmount().absoluteValue.toString())
+                println("AFTER REPLACE: ${overBudgetDisp.text}")
+            }
+
+
+
         }//end of else
     }//end of updateSection function
 

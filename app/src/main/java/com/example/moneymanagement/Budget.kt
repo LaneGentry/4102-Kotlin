@@ -167,6 +167,18 @@ class Budget(var income: Double)
             return listOf(name, percentage.toString(), amount.toString())
         }
 
+        //YOOOOOOOOO i did not know you could do this?!?!?!
+        //returns the instance of the Budget object the section it is called on belongs to
+        /*EX:  Budget1 has sections sectionA and sectionB while Budget2 has sectionC
+         *  sectionA.getBudgetObj() will return Budget1
+         *  sectionB.getBudgetObj() will return Budget1
+         *  sectionC.getBudgetObj() will return Budget2
+         */
+        fun getBudgetObj(): Budget
+        {
+            return this@Budget
+        }
+
         override fun toString(): String {
             var section = ""
             section += "\nSection: $name\n" +

@@ -40,6 +40,17 @@
         app:layout_constraintBottom_toTopOf="@+id/sectionName"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!--displays whether or not the user is over budget and if they are the $ amount over budget-->
+    <TextView
+        android:id="@+id/display_overBudget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="6dp"
+        android:text="$0.0 Unallocated"
+        app:layout_constraintBottom_toTopOf="@+id/sectionName"
+        app:layout_constraintStart_toStartOf="@+id/sectionName" />
+
     <TextView
         android:id="@+id/sectionName"
         android:layout_width="wrap_content"
