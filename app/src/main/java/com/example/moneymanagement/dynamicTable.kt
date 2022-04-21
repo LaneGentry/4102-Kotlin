@@ -15,7 +15,7 @@ import kotlin.math.absoluteValue
 *        add functionality to check this (see methods in Budget.kt) when user updates section values
 *        (see updateBtn event listener)
 *            if over budget update element with $ amount over budget
-*   add an element to the XML to display the income
+*   add an element to the XML to display the income -DONE
 *       add functionality for income to be changed
 *           add function to Budget to re calc amounts
 *           current idea: easy but less intuitive is just an editable decimal numeric textedit with an event listener attached
@@ -32,13 +32,17 @@ class dynamicTable : AppCompatActivity() {
         //just to have a budget object to test with
         //TO DO: add global constant for the key 'income'
         val income = intent.extras!!.getInt("income")
-        println("DynamicTable income: $income")
         val budget = Budget(income)
 
         //current idea: initialize current section to one of the defaults since
         //it has to be initialized in order to be passed to a function
+        //TO DO: currently relies on there always being a 'savings' section in the budget - change to use whatever the first budget section
         var currSection = budget.getSection("savings")
         println(budget.getSection("savings").percentage)
+
+        //get TextView for displaying income amount and use regex to replace the number portion with the budgets income
+        val incomeDisp = findViewById<TextView>(R.id.display_incomeAmt)
+        incomeDisp.text =  incomeDisp.text.replace("\\d+\\.\\d+".toRegex(), budget.income.toString())
 
         //bind table rows to BudgetSection objects - done once on initial table gen
         var rowData = mutableMapOf<TableRow, Budget.BudgetSection>()

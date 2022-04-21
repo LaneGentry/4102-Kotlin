@@ -21,18 +21,6 @@
         </activity>
 
         <activity android:name="com.example.termproject_a.dynamicTable"></activity>
-        <!-- LK: just a temp way to get to the dynamicTable for testing
-        <activity
-            android:name="com.example.termproject_a.dynamicTable"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        -->
-
     </application>
 
 </manifest>
