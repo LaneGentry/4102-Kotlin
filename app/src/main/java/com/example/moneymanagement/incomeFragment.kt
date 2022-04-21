@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import com.example.termproject_a.Budget
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,19 +37,19 @@ class incomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_income, container, false)
 
         var incomeEditText : EditText = v.findViewById(R.id.editTextTextIncome) //Makes Edit TextBox Object
         var buttonSaveAndNext : Button = v.findViewById(R.id.button3)
 
-        // When the save/next button is clicked the income is taken from the edittextIncome
+        var firstTextBox : TextView = v.findViewById(R.id.textView2)
+
+
+
+
+
         buttonSaveAndNext.setOnClickListener{
-            //var income = incomeEditText.text.toString()   //Converts entered income to text, then to string
 
-
-            // D bait line //
-            //var BudgetObject = Budget(Integer.parseInt(income))  // parseInt Function turns string value into int value
 
             val fragment = BudgetFragment()
             val transaction = fragmentManager?.beginTransaction()

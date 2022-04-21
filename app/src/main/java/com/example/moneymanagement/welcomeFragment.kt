@@ -43,9 +43,15 @@ class welcomeFragment : Fragment() {
 
         //setting the onclick listener to switch to another fragment instead of using a intrface//
         buttonNew.setOnClickListener{
-            val fragment = incomeFragment()
+
+
+
+
+            /*
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.fragmentContainerView, fragment)?.commit()
+
+             */
         }
 
 
