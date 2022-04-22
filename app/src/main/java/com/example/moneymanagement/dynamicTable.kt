@@ -1,8 +1,7 @@
 package com.example.termproject_a
 
-import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
@@ -11,10 +10,10 @@ import kotlin.math.absoluteValue
 
 
 /*GENERAL TO DO'S:
-*    add an element to the XML to display whether or not user is over budget
-*        add functionality to check this (see methods in Budget.kt) when user updates section values
+*    add an element to the XML to display whether or not user is over budget -DONE
+*        add functionality to check this (see methods in Budget.kt) when user updates section values -DONE
 *        (see updateBtn event listener)
-*            if over budget update element with $ amount over budget
+*            if over budget update element with $ amount over budget -DONE
 *   add an element to the XML to display the income -DONE
 *       add functionality for income to be changed
 *           add function to Budget to re calc amounts
@@ -47,11 +46,11 @@ class dynamicTable : AppCompatActivity() {
         val incomeDisp = findViewById<TextView>(R.id.display_incomeAmt)
         incomeDisp.text =  incomeDisp.text.replace("\\d+\\.\\d+".toRegex(), budget.income.toString())
 
+        //get TextView that displays if the user is over budget/ amount unallocated and change the '$0.0 Unallocated' template to have the actual budgets unallocated amount
         val overBudgetDisp = findViewById<TextView>(R.id.display_overBudget)
-        val (templateToReplace) = Regex("^\\$(\\d+\\.\\d+)").find(overBudgetDisp.text)!!.destructured
-        println("TO REPLACE: $templateToReplace")
-        overBudgetDisp.text = overBudgetDisp.text.replace(templateToReplace.toRegex(), budget.getFreeAmount().toString())
 
+
+        displayAllocationInfo(budget)
 
         //bind table rows to BudgetSection objects - done once on initial table gen
         var rowData = mutableMapOf<TableRow, Budget.BudgetSection>()
@@ -145,27 +144,42 @@ class dynamicTable : AppCompatActivity() {
             println("TABLE ROW: ${tableRow}")
             populateRow(tableRow, section)
 
-            //check if user is over budget and if so change ****** to display $ amount over budget
 
-            //gets budget object section belongs to - see Budget.kt for details
-            val budget = section.getBudgetObj()
-
-            if(!budget.hasEmptySpace())
-            {
-                //gets the TextView that displays whether or not the user is over budget
-                val overBudgetDisp = findViewById<TextView>(R.id.display_overBudget)
-                //":\\s(.*)$"
-                val (currDispToReplace) =  Regex("^(\\$\\d+\\.\\d+.*)$").find(overBudgetDisp.text)!!.destructured
-                println("STRING TO REPLACE: $currDispToReplace")
-                println("CURR TEXT: ${overBudgetDisp.text}")
-                overBudgetDisp.text = overBudgetDisp.text.replace(Regex.fromLiteral(currDispToReplace), budget.getFreeAmount().absoluteValue.toString())
-                println("AFTER REPLACE: ${overBudgetDisp.text}")
-            }
-
-
+            //updates the TextView displaying information about whether user is over/under budget
+            //re-calculates amount over/under budget and if a switch has been made from under to over budget or vice versa
+            //text message will also switch accordingly (it actually does it every time that's just the only time you see it lol)
+            //gets budget object the section calling the method belongs to - see Budget.kt for details
+            displayAllocationInfo(section.getBudgetObj())
 
         }//end of else
     }//end of updateSection function
+
+
+    fun displayAllocationInfo(budget: Budget)
+    {
+        val overBudgetDisp = findViewById<TextView>(R.id.display_overBudget)
+        val newDispAmt = budget.getFreeAmount().absoluteValue
+        var textColor = "#000000"
+        var newDispText: String
+        when (budget.hasEmptySpace()) {
+            true ->
+            {
+                println("HAS EMPTY SPACE")
+                newDispText = "You have $$newDispAmt Unallocated"
+                textColor = "#5cb038"
+
+            }
+            else  ->
+            {
+                println("NO EMPTY SPACE")
+                newDispText = "You are $$newDispAmt Over Budget"
+                textColor = "#FF0000"
+
+            }
+        }
+        overBudgetDisp.text = newDispText
+        overBudgetDisp.setTextColor(Color.parseColor(textColor))
+    }
 
     /*
     * takes data from section passed and adds each piece to the row in a TextView
