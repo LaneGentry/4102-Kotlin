@@ -29,12 +29,10 @@ class dynamicTable : AppCompatActivity() {
         setContentView(R.layout.dynamic_table)
 
         //just to have a budget object to test with
-        //TO DO: add global constant for the key 'income'
         val income = intent.extras!!.getInt("income")
         val budget = Budget(income)
 
-        //current idea: initialize current section to one of the defaults since
-        //it has to be initialized in order to be passed to a function
+        //initialize current section to one of the defaults since it has to be initialized in order to be passed to a function
         //TO DO: currently relies on there always being a 'savings' section in the budget - change to use whatever the first budget section
         var currSection = budget.getSection("savings")
         println(budget.getSection("savings").percentage)
@@ -42,6 +40,7 @@ class dynamicTable : AppCompatActivity() {
         //FOR TESTING ONLY - plz do not leave this here
         budget.getSection("savings").percentage = 0.01
         println("unallocated: ${budget.getFreeAmount()} ")
+
         //get TextView for displaying income amount and use regex to replace the number portion with the budgets income
         val incomeDisp = findViewById<TextView>(R.id.display_incomeAmt)
         incomeDisp.text =  incomeDisp.text.replace("\\d+\\.\\d+".toRegex(), budget.income.toString())
@@ -99,9 +98,11 @@ class dynamicTable : AppCompatActivity() {
             rowData[tableRow] = section
 
             //populate data from object - function creates new TextViews for the row as needed
+            //see populateRow for more detailed explanation
             populateRow(tableRow, section)
-            println("AFTER POP: ${tableRow.children}")
-            println(section.getSectionData()[1])
+
+            //TESTING: println("AFTER POP: ${tableRow.children}")
+            //TESTING: println(section.getSectionData()[1])
 
             //add row to table
             tl.addView(tableRow)
@@ -110,13 +111,27 @@ class dynamicTable : AppCompatActivity() {
     }// end of on create
 
 
+
+    /*
+    *  updateSection retrieves user input from datainput EditText, checks it is not null/empty and if valid checks
+    *   which radio button has been selected (percentage/amount) to determine whether input should be treated as a new percent or a new amount
+    *   the appropriate property in the BudgetSection passed as param 'section' is updated.
+    *   the table row that displays that sections data is then retrieved from the rowData Map (TableRow that displays section data -> BudgetSection obj with said data)
+    *   TableRow and BudgetSection are then passed to populateRow which updates the data in the actual table display
+    * @param section - the section corresponding to the row selected by the user
+    *   (section stored in currSection set from tableRow event handler)
+    * @param rowData - map containing addresses to each table row and the BudgetSection obj containing the data that populated that row
+    * @return unit - no specified return
+    * */
     private fun updateSection(section: Budget.BudgetSection, rowData: Map<TableRow, Budget.BudgetSection>)
     {
         println("updateSection is updating the section: $section")
 
+        //if input can't be parsed to a double newData will be null this takes care of blanks and any funky input
         val newData = findViewById<EditText>(R.id.dataInput).text.toString().toDoubleOrNull()
-        println(newData)
-        //Toast.makeText(applicationContext, "$newData",Toast.LENGTH_SHORT).show()
+        //println("newData: $newData")
+
+        //if new data is null (parsing to double above failed) make toast and do not execute the rest of the function
         //TO DO: add proper toast message if input is left blank
         if (newData == null)
         {
@@ -136,42 +151,54 @@ class dynamicTable : AppCompatActivity() {
                 amountBtnId -> section.amount = newData
                 else -> println("NOOOOOOOOO")
             }
-            println("section after update:\n$section")
+            //println("section after update:\n$section")
             //println(rowData.filterValues { it === section }.toString())
 
             //search rowData Map for value that matches section and return key (table row)
             val tableRow = rowData.filterValues { it === section }.keys.elementAt(0)
-            println("TABLE ROW: ${tableRow}")
+            //println("TABLE ROW: ${tableRow}")
+
+            //pass the row whose data should be updated and the section that row displays
+            //(section has been updated in the above when block and so already has the updated data tableRow needs to be updated with)
             populateRow(tableRow, section)
-
-
-            //updates the TextView displaying information about whether user is over/under budget
-            //re-calculates amount over/under budget and if a switch has been made from under to over budget or vice versa
-            //text message will also switch accordingly (it actually does it every time that's just the only time you see it lol)
-            //gets budget object the section calling the method belongs to - see Budget.kt for details
-            displayAllocationInfo(section.getBudgetObj())
 
         }//end of else
     }//end of updateSection function
 
 
-    fun displayAllocationInfo(budget: Budget)
+    /*
+    * displayAllocationInfo is called from the function attached to the 'update' button event handler
+    *   It takes the entire budget as a parameter and uses the Budget class' methods to check whether or not the
+    *   user is over budget and changes the display message and text color accordingly. The display is also updated with how much the user is
+    *   over/under budget.
+    * NOTE: this function must be called AFTER populateRow is called or from within at the bottom of the populateRow function so that the data
+    *           in Budget Obj will reflect the change to one of its section
+    * @param budget - the Budget Obj for the current budget
+    * @return unit - no return value specified
+    * */
+    private fun displayAllocationInfo(budget: Budget)
     {
+        //gets the XML TextView that displays over/under budget information
         val overBudgetDisp = findViewById<TextView>(R.id.display_overBudget)
+
+        //gets $ amount unallocated in the budget (will be negative if over budget)
         val newDispAmt = budget.getFreeAmount().absoluteValue
         var textColor = "#000000"
-        var newDispText: String
+        val newDispText: String
+
+        //checks if the budget has empty space (based on percentage - see Budget.kt for details)
+        //this function newDispAmt
         when (budget.hasEmptySpace()) {
             true ->
             {
-                println("HAS EMPTY SPACE")
+                //println("HAS EMPTY SPACE")
                 newDispText = "You have $$newDispAmt Unallocated"
                 textColor = "#5cb038"
 
             }
             else  ->
             {
-                println("NO EMPTY SPACE")
+                //println("NO EMPTY SPACE")
                 newDispText = "You are $$newDispAmt Over Budget"
                 textColor = "#FF0000"
 
@@ -193,9 +220,12 @@ class dynamicTable : AppCompatActivity() {
     *       TextView for "4500" has an id=3
     * this way all TextViews are created and updated in this function and all based on the same
     * colPos' calculated from the getSectionData list
+    * At the end of the function displayAllocationInfo is called which updates display with
+    * over/under budget info
     *
     * @param row the XML table row to be populated
     * @param section the BudgetSection object whose data should populate the row param
+    * @return unit - no specific return value specified
     * */
     fun populateRow(row: TableRow, section: Budget.BudgetSection)
     {
@@ -214,7 +244,6 @@ class dynamicTable : AppCompatActivity() {
 
             //set text for each column in the row
             //multiplying to get the ##.####% un rounds so round function must be reapplied (bottom of the Budget.kt file)
-            //TO DO: probably isn't good for this to be hardcoded this way
             when (colPos)
             {
                 1   -> tableCell.text = data
@@ -223,5 +252,14 @@ class dynamicTable : AppCompatActivity() {
                 else -> println("turns out there are consequences to your actions :(")
             }//end of when
         }//end of forEachIndexed
+
+
+        //updates the TextView displaying information about whether user is over/under budget
+        //re-calculates amount over/under budget and if a switch has been made from under to over budget or vice versa
+        //text message will also switch accordingly (it actually does it every time that's just the only time you see it lol)
+        //gets budget object the section calling the method belongs to - see Budget.kt for details
+        //displayAllocationInfo(section.getBudgetObj())
+        displayAllocationInfo(section.getBudgetObj())
+
     }//end of populateRow function
 }//end of dynamicTable class

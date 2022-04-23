@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:layout_marginBottom="33dp"
-        android:text="Income: 0.0"
+        android:text="@string/income_0_0"
         app:layout_constraintBottom_toTopOf="@+id/sectionName"
         app:layout_constraintStart_toStartOf="parent" />
 
