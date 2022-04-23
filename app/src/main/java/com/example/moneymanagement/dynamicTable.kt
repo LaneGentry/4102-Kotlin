@@ -107,10 +107,10 @@ class dynamicTable : AppCompatActivity() {
 
             //populate data from object
             var count = 0
-            mmm.getSectionData(section.name).forEach()
+            // mmm.getSectionData(section.name).forEach()
             {
                 var tv = TextView(context)
-                tv.setText(it)
+            //  tv.setText(it)
                 count++
                 tv.id = count
                 tableRow.addView(tv)

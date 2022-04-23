@@ -20,37 +20,46 @@
         android:layout_below="@+id/guide3"
         android:layout_centerInParent="true"
         android:layout_marginTop="200dp"
-        android:text="Visualizer"
-        android:backgroundTint="#EFB644"/>
+        android:backgroundTint="#EFB644"
+        android:text="Visualizer" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button4"
-        android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
-        android:text="Budget Guide"
-        android:backgroundTint="#EFB644"/>
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#EFB644"
+        android:text="Budget Guide" />
 
     <Button
         android:id="@+id/button6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reasons To Save"
         android:layout_below="@+id/button5"
-        android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
-        android:backgroundTint="#EFB644"/>
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#EFB644"
+        android:text="Reasons To Save" />
 
     <Button
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tips For Saving"
         android:layout_below="@+id/button6"
-        android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
-        android:backgroundTint="#EFB644"/>
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#EFB644"
+        android:text="Tips For Saving" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_below="@+id/button7"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="100dp"/>
 
 </RelativeLayout>

@@ -75,7 +75,7 @@
         android:layout_centerInParent="true"
         android:ems="10"
         android:hint="Input gas expenses"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/editTextTextPersonName4"
@@ -85,7 +85,7 @@
         android:layout_centerInParent="true"
         android:ems="10"
         android:hint="Total spent on activities"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/editTextTextPersonName5"
@@ -95,7 +95,7 @@
         android:layout_centerInParent="true"
         android:ems="10"
         android:hint="All other expenses"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/textViewMortgage"
@@ -116,7 +116,7 @@
         android:layout_centerInParent="true"
         android:ems="10"
         android:hint="All other expenses"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/textViewRent"
@@ -137,7 +137,7 @@
         android:layout_centerInParent="true"
         android:ems="10"
         android:hint="Monthly Rent"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/textViewPhone"
@@ -158,7 +158,7 @@
         android:layout_centerInParent="true"
         android:ems="10"
         android:hint="Monthly Phone Payment"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/textViewUtilities"
@@ -179,7 +179,7 @@
         android:layout_centerInParent="true"
         android:ems="10"
         android:hint="Utilities Payment"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/textViewInsurance"
@@ -200,7 +200,7 @@
         android:layout_centerInParent="true"
         android:ems="10"
         android:hint="Insurance Payment"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <Button
         android:id="@+id/button3"
@@ -209,7 +209,8 @@
         android:layout_below="@+id/editTextTextPersonName10"
         android:layout_centerInParent="true"
         android:backgroundTint="#EFB644"
-        android:text="Save And Next" />
+        android:text="Save And Next"
+        android:layout_marginTop="20dp"/>
 
 
 </RelativeLayout>

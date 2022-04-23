@@ -18,6 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".TopTips" android:screenOrientation="portrait" />
+
+        <activity android:name=".SavingReasons" android:screenOrientation="portrait" />
+
+        <activity android:name=".BudgetGuide" android:screenOrientation="portrait" />
+
+
+
     </application>
 
 </manifest>
