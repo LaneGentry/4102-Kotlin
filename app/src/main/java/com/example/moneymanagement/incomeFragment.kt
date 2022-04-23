@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import com.example.termproject_a.Budget
 
 // TODO: Rename parameter arguments, choose names that match
@@ -38,50 +36,31 @@ class incomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_income, container, false)
-
+        val context = this
         var incomeEditText : EditText = v.findViewById(R.id.editTextTextIncome) //Makes Edit TextBox Object
-        var gasEditText : EditText = v.findViewById(R.id.editTextTextGas)
-        var funEditText : EditText = v.findViewById(R.id.editTextTextPersonName4)
-        var misEditText : EditText = v.findViewById(R.id.editTextTextPersonName5)
-        var mortEditText : EditText = v.findViewById(R.id.editTextTextPersonName6)
-        var rentEditText : EditText = v.findViewById(R.id.editTextTextPersonName7)
-        var phoneEditText : EditText = v.findViewById(R.id.editTextTextPersonName8)
-        var utilEditText : EditText = v.findViewById(R.id.editTextTextPersonName9)
-        var insuranceEditText : EditText = v.findViewById(R.id.editTextTextPersonName10)
+        var buttonSaveAndNext : Button = v.findViewById(R.id.to_table_display)
 
-
-        var buttonSaveAndNext : Button = v.findViewById(R.id.button3)
-
-        var firstTextBox : TextView = v.findViewById(R.id.textView2)
-
-
-
-
-
+        // When the save/next button is clicked the income is taken from the edittextIncome
         buttonSaveAndNext.setOnClickListener{
+            println("save and next event...")
+            //TO DO: validate income - income cannot be null or blank. if it is display toast message and do not allow
+            //  the rest of the function to execute until it is valid
+            var income = Integer.parseInt(incomeEditText.text.toString())   //Converts entered income to text, then to string
 
-            if(incomeEditText.text.toString() == "" || gasEditText.text.toString() == "" || funEditText.text.toString() == "" ||
-                misEditText.text.toString() == "" || mortEditText.text.toString() == "" || rentEditText.text.toString() == "" ||
-                phoneEditText.text.toString() == "" || utilEditText.text.toString() == "" || insuranceEditText.text.toString() == "") {
 
-                val text = "Must Input data for all Instances"
-                val duration = Toast.LENGTH_SHORT
+            // D bait line //
+            //var budgetObject = Budget(income)  // parseInt Function turns string value into int value
 
-                val toast = Toast.makeText(v.context, text, duration)
-                toast.show()
+            val fragment = BudgetFragment()
+            val bundle = Bundle()
+            bundle.putInt("income", income)
+            fragment.arguments = bundle
 
-            }else{
-
-                val fragment = BudgetFragment()
-                val transaction = fragmentManager?.beginTransaction()
-                transaction?.replace(R.id.fragmentContainerView, fragment)?.commit()
-            }
-
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.fragmentContainerView, fragment)?.commit()
         }
-
-
-
 
 
         return v

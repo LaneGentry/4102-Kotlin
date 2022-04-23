@@ -3,6 +3,7 @@ package com.example.termproject_a
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
+
 class Budget(var income: Double)
 {
     //income will usually be an Int but having the primary be a Double accounts for the few times it isn't
@@ -120,14 +121,6 @@ class Budget(var income: Double)
         return (getFreePercentage() > 0)
     }
 
-    //I didn't want to fuck with BigDecimal so here's this instead
-    private fun round(decimal: Double, scale: Int = 0): Double
-    {
-        //sets number of decimal points based on scale param
-        val df: DecimalFormat = DecimalFormat("#.${"#".repeat(scale)}")
-        df.roundingMode = RoundingMode.HALF_UP
-        return df.format(decimal).toDouble()
-    }
 
     override fun toString(): String
     {
@@ -152,7 +145,6 @@ class Budget(var income: Double)
         var percentage: Double = percentage
             set(value)
             {
-
                 field = value
                 val newAmount = field * income
                 //if current amount differs from amount calculated by new percentage also set amount
@@ -168,10 +160,23 @@ class Budget(var income: Double)
                 //if current percentage differs from percentage calculated by new amount also set percentage
                 if(newPercentage != percentage) percentage = newPercentage
             }
-        
+            get() = round(field, 2)
+
         fun getSectionData(): List<String>
         {
             return listOf(name, percentage.toString(), amount.toString())
+        }
+
+        //YOOOOOOOOO i did not know you could do this?!?!?!
+        //returns the instance of the Budget object the section it is called on belongs to
+        /*EX:  Budget1 has sections sectionA and sectionB while Budget2 has sectionC
+         *  sectionA.getBudgetObj() will return Budget1
+         *  sectionB.getBudgetObj() will return Budget1
+         *  sectionC.getBudgetObj() will return Budget2
+         */
+        fun getBudgetObj(): Budget
+        {
+            return this@Budget
         }
 
         override fun toString(): String {
@@ -184,3 +189,12 @@ class Budget(var income: Double)
 
     }//end of inner class BudgetSection
 }//end of Budget class
+
+//I didn't want to fuck with BigDecimal so here's this instead
+fun round(decimal: Double, scale: Int = 0): Double
+{
+    //sets number of decimal points based on scale param
+    val df: DecimalFormat = DecimalFormat("#.${"#".repeat(scale)}")
+    df.roundingMode = RoundingMode.HALF_UP
+    return df.format(decimal).toDouble()
+}
