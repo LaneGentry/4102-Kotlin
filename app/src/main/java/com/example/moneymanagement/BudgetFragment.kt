@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import com.example.termproject_a.dynamicTable
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,15 +23,13 @@ private const val ARG_PARAM2 = "param2"
 class BudgetFragment : Fragment() {
 
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val ARG_PARAM1 = "income"
+    private var income: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            income = it.getInt(ARG_PARAM1)
         }
     }
 
@@ -41,16 +40,16 @@ class BudgetFragment : Fragment() {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_budget, container, false)
 
-        var toVisualizerButton : Button = v.findViewById(R.id.button4)
+        var toVisualizerButton : Button = v.findViewById(R.id.display_budget)
         var toBudgetGuideButton : Button = v.findViewById(R.id.button5)
         var toReasonsToSaveButton : Button = v.findViewById(R.id.button6)
         var toTipsForSavingButton : Button = v.findViewById(R.id.button7)
         var backButton :Button = v.findViewById(R.id.button8)
 
         toVisualizerButton.setOnClickListener{
-
-
-
+            val intent = Intent(activity, dynamicTable()::class.java)
+            intent.putExtra("income", income)
+            startActivity(intent)
         }
 
         toBudgetGuideButton.setOnClickListener{

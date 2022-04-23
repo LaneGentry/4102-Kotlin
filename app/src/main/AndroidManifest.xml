@@ -25,6 +25,8 @@
 
         <activity android:name=".BudgetGuide" android:screenOrientation="portrait" />
 
+        <activity android:name="com.example.termproject_a.dynamicTable" />
+
 
 
     </application>
