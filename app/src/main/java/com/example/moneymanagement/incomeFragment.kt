@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import com.example.termproject_a.Budget
 
 // TODO: Rename parameter arguments, choose names that match
@@ -41,25 +42,32 @@ class incomeFragment : Fragment() {
         val context = this
         var incomeEditText : EditText = v.findViewById(R.id.editTextTextIncome) //Makes Edit TextBox Object
         var buttonSaveAndNext : Button = v.findViewById(R.id.to_table_display)
+        var income : Int
 
         // When the save/next button is clicked the income is taken from the edittextIncome
         buttonSaveAndNext.setOnClickListener{
             println("save and next event...")
-            //TO DO: validate income - income cannot be null or blank. if it is display toast message and do not allow
+            // validate income - income cannot be null or blank. if it is display toast message and do not allow
             //  the rest of the function to execute until it is valid
-            var income = Integer.parseInt(incomeEditText.text.toString())   //Converts entered income to text, then to string
+            if(!(incomeEditText.getText().toString()).equals("")) {
+                income =
+                    Integer.parseInt(incomeEditText.text.toString())   //Converts entered income to text, then to string
 
 
-            // D bait line //
-            //var budgetObject = Budget(income)  // parseInt Function turns string value into int value
+                // D bait line //
+                //var budgetObject = Budget(income)  // parseInt Function turns string value into int value
 
-            val fragment = BudgetFragment()
-            val bundle = Bundle()
-            bundle.putInt("income", income)
-            fragment.arguments = bundle
+                val fragment = BudgetFragment()
+                val bundle = Bundle()
+                bundle.putInt("income", income)
+                fragment.arguments = bundle
 
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.fragmentContainerView, fragment)?.commit()
+                val transaction = fragmentManager?.beginTransaction()
+                transaction?.replace(R.id.fragmentContainerView, fragment)?.commit()
+            }
+            else{
+                incomeEditText.setError("Please enter your income!")
+            }
         }
 
 
@@ -86,3 +94,4 @@ class incomeFragment : Fragment() {
             }
     }
 }
+
