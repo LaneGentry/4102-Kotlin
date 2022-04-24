@@ -55,7 +55,7 @@ class dynamicTable : AppCompatActivity() {
         var rowData = mutableMapOf<TableRow, Budget.BudgetSection>()
 
         //add event listener for update button
-        findViewById<Button>(R.id.updateBtn).setOnClickListener { updateSection(currSection, rowData) }
+        findViewById<Button>(R.id.updateBtn).setOnClickListener{ updateSection(currSection, rowData) }
 
         //TO DO: when radio button choice changes change the hint for EditText R.id.dataInput to reflect that change
         //EX: amount button checked -> hint = Amount
