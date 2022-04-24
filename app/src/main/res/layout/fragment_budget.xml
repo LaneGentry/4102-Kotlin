@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/guide3"
         android:layout_centerInParent="true"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="150dp"
         android:backgroundTint="#EFB644"
         android:text="Visualizer" />
 
@@ -58,11 +58,11 @@
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
         android:layout_below="@+id/button7"
         android:layout_centerInParent="true"
-        android:backgroundTint="#EFB644"/>
-    android:layout_marginTop="100dp"/>
+        android:backgroundTint="#EFB644"
+        android:text="Back"
+        android:layout_marginTop="200dp"/>
 
 
 </RelativeLayout>

@@ -39,7 +39,7 @@ class welcomeFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_welcome, container, false)
 
         val buttonNew : Button = v.findViewById(R.id.button)           // declaring the buttons
-        val buttonExisting : Button = v.findViewById(R.id.button2)
+
 
         //setting the onclick listener to switch to another fragment instead of using a intrface//
         buttonNew.setOnClickListener{

@@ -35,14 +35,4 @@
         android:backgroundTint="#EFB644"
         android:text="Start New" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="75dp"
-        android:backgroundTint="#EFB644"
-        android:text="Existing Budget" />
-
 </RelativeLayout>
