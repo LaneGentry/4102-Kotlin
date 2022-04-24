@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/guide2"
         android:layout_centerInParent="true"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="100dp"
         android:text="Income"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -209,7 +209,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextTextIncome"
         android:layout_centerInParent="true"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="#EFB644"
         android:text="Save And Next" />
 
