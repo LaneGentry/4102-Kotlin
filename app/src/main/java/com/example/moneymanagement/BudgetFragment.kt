@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
-import com.example.termproject_a.dynamicTable
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,7 +45,7 @@ class BudgetFragment : Fragment() {
         var backButton :Button = v.findViewById(R.id.button8)
 
         toVisualizerButton.setOnClickListener{
-            val intent = Intent(activity, dynamicTable()::class.java)
+            val intent = Intent(activity, DynamicTable()::class.java)
             intent.putExtra("income", income)
             startActivity(intent)
         }

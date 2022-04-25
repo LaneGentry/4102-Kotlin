@@ -28,12 +28,14 @@ import java.text.DecimalFormat
 *   getFreeAmount - returns the $ amount of income that is unallocated in the budget (negative if over budget)
 *   getFreePercentage - return the % amount of income that is unallocated in the budget (negative if over budget)
 *   toString - overridden to print out all sections with all their data (just there to make testing easier)
+*
+* AUTHOR: Lauren Stewart
+* LAST MODIFIED: 4/21/22
 * */
-class Budget(var income: Double)
+class Budget(val income: Double)
 {
     //income will usually be an Int but having the primary be a Double accounts for the few times it isn't
     constructor(income : Int) : this(income.toDouble())
-
     //unique list to hold the BudgetSection objects
     var sections = mutableSetOf<BudgetSection>()
 
@@ -160,7 +162,7 @@ class Budget(var income: Double)
     fun getSection(sectionName: String): BudgetSection
     {
         /* requires .any to evaluate to true
-         * (sectionName must be match to a name property of one of the BudgetSection objects)
+         * (sectionName must be matched to the name property of one of the BudgetSection objects)
          *  if no exception is thrown the requireNotNull should never be able to fail but including it
          *  allows the returned BudgetSection to be used without null-safety checks
         * */
@@ -282,8 +284,6 @@ class Budget(var income: Double)
     *   getBudgetObj - returns the instance of the containing class (Budget) that the calling instance (BudgetSection) belongs to
     *   toString - overridden to print data for the instance (just there to make testing easier)
     *
-    * AUTHOR: Lauren Stewart
-    * LAST MODIFIED:
     * */
     inner class BudgetSection(var name: String, percentage: Double = 0.0, amount: Double = 0.0)
     {
@@ -357,11 +357,15 @@ class Budget(var income: Double)
     }//end of inner class BudgetSection
 }//end of Budget class
 
-//I didn't want to fuck with BigDecimal so here's this instead
+/*
+* A simple rounding function that rounds a decimal to the number of places specified by the 'scale' parameter
+* This does use DecimalFormat and RoundingMode which are part of Java libraries
+* moved here to be a package declaration so it can be used in the dynamic table file
+* */
 fun round(decimal: Double, scale: Int = 0): Double
 {
     //sets number of decimal points based on scale param
-    val df: DecimalFormat = DecimalFormat("#.${"#".repeat(scale)}")
+    val df = DecimalFormat("#.${"#".repeat(scale)}")
     df.roundingMode = RoundingMode.HALF_UP
     return df.format(decimal).toDouble()
 }
