@@ -27,6 +27,7 @@ import java.text.DecimalFormat
 *   removeSection - removes a specified section from the budget
 *   getFreeAmount - returns the $ amount of income that is unallocated in the budget (negative if over budget)
 *   getFreePercentage - return the % amount of income that is unallocated in the budget (negative if over budget)
+*   toString - overridden to print out all sections with all their data (just there to make testing easier)
 * */
 class Budget(var income: Double)
 {
@@ -82,7 +83,7 @@ class Budget(var income: Double)
     *   the percentage param
     *
     * PRECONDITIONS:
-    *   if an amount is passed it must be validated beforehand - should be non-null positive number
+    *   if an amount is passed it must be validated beforehand - should be non-null positive number > 0
     *   if a percent is passed it must be validated beforehand - should be non-null decimal [0-1]
     *   the 'name' != a 'name' property in an existing BudgetSection object
     * POSTCONDITIONS: a new BudgetSection object has been created and added to the sections Set of BudgetSections for the Budget
@@ -212,11 +213,11 @@ class Budget(var income: Double)
     /*
     * checks if the budget is using 100% of income - based on percentage using getFreePercentage()
     * returns Boolean based on:
-    *    getFreePercentage returns 1 - total of budget section percentages
-    *    returns a negative when space is exceeded
-    *    100% full return (0)     120% full return (-0.2)
+    *    getFreePercentage returns (1 - total of budget section percentages)
+    *    returns a negative number when totaled sections take up > 100% of the income for the budget
+    *    100% full getFreePercentage returns (0)     120% full getFreePercentage returns (-0.2)
     *
-    * PRECONDITIONS: none
+    * PRECONDITIONS: getFreePercentage must return a valid number
     * POSTCONDITIONS: a Boolean value will have been returned based on whether or not the the budget is using less than 100% of the income
     *
     * @return true if getFreePercentage is greater than 0 ie budget does not use 100% of income
@@ -229,10 +230,26 @@ class Budget(var income: Double)
     }
 
 
+    /*
+    * GLOBALS:
+    *   income  - the $ amount of income used to calculate the budget
+    *   sections - Set that stores the BudgetSection objects of the Budget
+    *
+    * Provides and easy way to get a clear visual representation of the budget object to make testing easier
+    *
+    * PRECONDITIONS: income and sections globals must be initialized
+    * POSTCONDITIONS: a formatted string containing information about the budget and the data for each section of the budget has been returned
+    * @return a formatted string containing the income for the budget and the 'name', 'percentage', and 'amount'
+    *   properties for each section (BudgetSection obj) in the budget
+    * */
     override fun toString(): String
     {
-        var budget = ""
+        var budget = "\nIncome: $income\n" +
+                        "Empty Space: ${this.hasEmptySpace()}\n" +
+                        "Unused %: ${this.getFreePercentage()}\n" +
+                        "Unused $: ${this.getFreeAmount()}\n"
 
+        //loops through sections Set, with each element temp assigned to sectionObj
         sections.forEach { sectionObj ->
             budget += "\nSection: ${sectionObj.name}\n" +
                       "\tPercentage: ${sectionObj.percentage}\n" +
@@ -241,13 +258,40 @@ class Budget(var income: Double)
         return budget
     }
 
-    //defined as 'inner' because it needs access to some of the Budget class' properties and methods
-    inner class BudgetSection(var name: String, percentage: Double, amount: Double)
+    /*
+    * DESCRIPTION: used to create objects to represent each section of the budget. each section should have
+    *   a name (EX: "savings", "utilities", etc), the percentage of the budgets income allocated to the section,
+    *   and the $ amount of the income allocated to the section. Inner class definition gives access to instance globals
+    *   needed to calculate percentages/amounts such as income and insures that each BudgetSection is associated with a Budget obj.
+    *   NOTE: a sections percentage and amount are linked in that if the budget has an income of $100
+    *       if percentage = 0.3 amount should be amount = 30 likewise if amount = 45 percentage should
+    *       be percentage = 0.45 Custom setters are defined for both to account for this. When one property is set
+    *       its new value is used to calculate and set a new value for the other (see properties explicit declarations)
+    *
+    * CONSTRUCTOR(S): single constructor, required param for the name of the section. percentage and amount params are optional (defaults to 0)
+    *   but both amount and percentage should not be passed, only one of the two.
+    *   NOTE: as an inner class its constructor can only be called with receiver of containing class (Budget)
+    * VARIABLES:
+    *   income -  INSTANCE GLOBAL of containing Budget class holding income for the budget instance
+    *   name - string holding the name of the section. Used in Budget instance methods to retrieve a particular BudgetSection obj
+    *       (therefore all sections in a particular budget instance must have unique name)
+    *   percentage - double holding the percentage (as a decimal) of the budget instance's income allocated to the instance of the BudgetSection
+    *   amount - double holding the amount of the budget instance's income allocated to the instance of the BudgetSection
+    * METHODS:
+    *   getSectionData - returns a list with name, percentage, and amount of the calling instance
+    *   getBudgetObj - returns the instance of the containing class (Budget) that the calling instance (BudgetSection) belongs to
+    *   toString - overridden to print data for the instance (just there to make testing easier)
+    *
+    * AUTHOR: Lauren Stewart
+    * LAST MODIFIED:
+    * */
+    inner class BudgetSection(var name: String, percentage: Double = 0.0, amount: Double = 0.0)
     {
 
-        /* percentage and amount need custom setters and so cannot be explicitly declared in constructor
-         * when one is set the other must be updated - tests for value difference to avoid infinite ping pong of doom
-        ** change name to lowercase so that 'savings' and 'Savings' will be recognized as the same name - ca
+        /* percentage and amount need custom setters and so needs to be explicitly declared here instead of the primary constructor
+         * when one is set the other must be updated - when each is set it calculates what the new value of the other should be
+         * tests for value difference between current property value and the calculated one based on the new value
+         * this avoids an infinite ping pong of doom between the two setters
         */
         var percentage: Double = percentage
             set(value)
@@ -255,9 +299,9 @@ class Budget(var income: Double)
                 field = value
                 val newAmount = field * income
                 //if current amount differs from amount calculated by new percentage also set amount
-                if(newAmount != amount) amount = newAmount
+                if(newAmount != amount) {amount = newAmount}
             }
-            get() = round(field, 4)
+            get() = round(field, 4) //rounds percentage to 4 decimal places
 
         var amount: Double = amount
             set(value)
@@ -267,25 +311,41 @@ class Budget(var income: Double)
                 //if current percentage differs from percentage calculated by new amount also set percentage
                 if(newPercentage != percentage) percentage = newPercentage
             }
-            get() = round(field, 2)
+            get() = round(field, 2) //rounds amount to 2 decimal places
 
+        /*
+        * returns a list with name, percentage, and amount of the calling instance
+        * PRECONDITIONS: instance properties must be non null
+        * POSTCONDITIONS: a list with the sections properties has been returned
+        * @return List of strings containing the data for the BudgetSection instance
+        * */
         fun getSectionData(): List<String>
         {
             return listOf(name, percentage.toString(), amount.toString())
         }
 
-        //YOOOOOOOOO i did not know you could do this?!?!?!
-        //returns the instance of the Budget object the section it is called on belongs to
-        /*EX:  Budget1 has sections sectionA and sectionB while Budget2 has sectionC
-         *  sectionA.getBudgetObj() will return Budget1
-         *  sectionB.getBudgetObj() will return Budget1
-         *  sectionC.getBudgetObj() will return Budget2
+        /*
+         * returns the instance of the Budget object the calling BudgetSection belongs to
+         *  EX:  Budget1 has sections sectionA and sectionB while Budget2 has sectionC
+         *      sectionA.getBudgetObj() will return Budget1
+         *      sectionB.getBudgetObj() will return Budget1
+         *      sectionC.getBudgetObj() will return Budget2
+         *
+         * POSTCONDITIONS: instance of the Budget object the calling BudgetSection belongs to has been returned
+         * @return instance of the Budget object the calling BudgetSection belongs to
          */
         fun getBudgetObj(): Budget
         {
+            //@Budget annotation specifies that 'this' refers to instance of the Budget class
             return this@Budget
         }
 
+        /*
+        * provides an easy way get a visual representation of the BudgetSection
+        * PRECONDITIONS: none
+        * POSTCONDITIONS: a formatted string containing the sections data is returned
+        * @return a formatted string with the data for the instance
+        * */
         override fun toString(): String {
             var section = ""
             section += "\nSection: $name\n" +

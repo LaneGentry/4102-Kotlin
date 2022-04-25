@@ -4,25 +4,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.children
 import com.example.moneymanagement.R
 import kotlin.math.absoluteValue
 
 
-/*GENERAL TO DO'S:
-*    add an element to the XML to display whether or not user is over budget -DONE
-*        add functionality to check this (see methods in Budget.kt) when user updates section values -DONE
-*        (see updateBtn event listener)
-*            if over budget update element with $ amount over budget -DONE
-*   add an element to the XML to display the income -DONE
-*       add functionality for income to be changed
-*           add function to Budget to re calc amounts
-*           current idea: easy but less intuitive is just an editable decimal numeric textedit with an event listener attached
-*   add functionality for adding and removing sections
-*       adding it on this screen will probably make it very cluttered but I (LK) don't know shit about how to make multiple screens
-*       interact and pass information so if y'all have figured it out it would be awesome otherwise it'll end up on this page
-*
-*/
 class dynamicTable : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +25,7 @@ class dynamicTable : AppCompatActivity() {
         //FOR TESTING ONLY - plz do not leave this here
         budget.getSection("savings").percentage = 0.01
         println("unallocated: ${budget.getFreeAmount()} ")
-
+        println(budget.toString())
         //get TextView for displaying income amount and use regex to replace the number portion with the budgets income
         val incomeDisp = findViewById<TextView>(R.id.display_incomeAmt)
         incomeDisp.text =  incomeDisp.text.replace("\\d+\\.\\d+".toRegex(), budget.income.toString())
